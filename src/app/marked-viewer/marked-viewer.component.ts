@@ -1,4 +1,5 @@
-import { Component, OnInit, ElementRef, Input, OnChanges, HostBinding, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { MarkedService } from './../marked.service';
 
 @Component({
     selector: 'app-marked-viewer',
@@ -13,7 +14,9 @@ export class MarkedViewerComponent implements OnInit, OnChanges {
 
     private _internal_markdown: string = '';
 
-    constructor() { }
+    constructor(
+        private markedService: MarkedService
+    ) { }
 
     ngOnChanges() {
         if (this._internal_markdown === this.markdown) {
@@ -21,10 +24,6 @@ export class MarkedViewerComponent implements OnInit, OnChanges {
         }
 
         if (!this.markdownBody || !this.markdownBody.nativeElement) {
-            return;
-        }
-
-        if (typeof marked !== 'function') {
             return;
         }
 
@@ -38,6 +37,6 @@ export class MarkedViewerComponent implements OnInit, OnChanges {
 
     private refreshMarkdown() {
         let elm = <HTMLElement>this.markdownBody.nativeElement;
-        elm.innerHTML = marked(this._internal_markdown);
+        elm.innerHTML = this.markedService.mark(this._internal_markdown);
     }
 }

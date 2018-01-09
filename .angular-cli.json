@@ -10,8 +10,7 @@
       "assets": [
         "blog",
         "assets",
-        "favicon.ico",
-        { "glob": "marked.min.js*", "input": "../node_modules/marked/", "output": "./scripts" }
+        "favicon.ico"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -23,7 +22,9 @@
       "styles": [
         "styles.scss"
       ],
-      "scripts": [],
+      "scripts": [
+          "../node_modules/marked/marked.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
@@ -57,6 +58,7 @@
   },
   "defaults": {
     "styleExt": "css",
-    "component": {}
+    "component": { "spec": false },
+    "service": { "spec": false  }
   }
 }

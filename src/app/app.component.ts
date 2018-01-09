@@ -1,24 +1,21 @@
+import { MarkedService } from './marked.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    title = `
-# test h1
-
-something **big** test
-    `;
+    title = '';
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
     ) { }
 
     ngOnInit() {
-        this.http.get('/blog/1.md', {responseType: 'text'})
+        this.http.get('/blog/1.md', { responseType: 'text' })
             .subscribe(data => {
                 this.title = data;
             });
